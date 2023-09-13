@@ -242,7 +242,6 @@ Making the seller window
     sellerWindow.protocol('WM_DELETE_WINDOW', lambda: subwindowclose(sellerWindow))
 
 
-
 def sellerLogData(reg, price, sellday, sellmonth, sellyear, window):
     """
 Takes the data from sellerWindow and logs it in the spreadsheet
@@ -316,7 +315,8 @@ def statsWindowStart():
                 buyComp = datasheet['K' + str(cell.row)].value
                 if buyComp is not None:
                     lifetimeComp = buyComp + lifetimeComp
-                    if datasheet['E' + str(cell.row)].value.split('-')[1] == datetime.date.today().month:
+                    if datasheet['E' + str(cell.row)].value.split('-')[1] == datetime.date.today().month and \
+                            datasheet['E' + str(cell.row)].value.split('-')[0] == datetime.date.today().year:
                         monthlyComp = monthlyComp + buyComp
 
     # Stats for a Seller
@@ -329,7 +329,8 @@ def statsWindowStart():
                     lifetimeComp = lifetimeComp + sellComp
                     # print(lifetimeComp)
                     # totals the commission for the month
-                    if datasheet['E' + str(cell.row)].value.split('-')[1] == datetime.date.today().month and datasheet['E' + str(cell.row)].value.split('-')[0] == datetime.date.today().year:
+                    if datasheet['E' + str(cell.row)].value.split('-')[1] == datetime.date.today().month and \
+                            datasheet['E' + str(cell.row)].value.split('-')[0] == datetime.date.today().year:
                         monthlyComp = monthlyComp + sellComp
     # Attempted Graph Code, Non-Functional in current state
     #
